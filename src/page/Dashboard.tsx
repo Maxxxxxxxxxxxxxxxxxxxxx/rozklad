@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
   const stopsData = useContext(DeparturesContext);
 
   return (
-    <div className="h-full w-full p-10">
+    <div className="h-full w-full">
       <Header />
       <DepartureBoardWrapper>
         {stopsData.map((d: StopData) => (

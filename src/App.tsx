@@ -15,7 +15,7 @@ function App() {
 
   return (
     <DeparturesContext value={stopsData}>
-      <div className="h-100 w-full margin-2">
+      <div className="margin-2 bg-gray-900 text-white">
         <Dashboard />
       </div>
     </DeparturesContext>
