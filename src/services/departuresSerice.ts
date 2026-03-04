@@ -1,5 +1,6 @@
 import { API_BASE_URL, STOPS } from "../constants";
 import type { DeparturesResponse, StopData } from "../types";
+import mockDepartures from "@/mock/mockDepartures.json";
 
 export const fetchDepartures = async (stopId: number) => {
   const res = await fetch(`${API_BASE_URL}/departures?stopId=${stopId}`);
@@ -27,3 +28,5 @@ export const fetchStopsData = async () => {
 
   return res;
 };
+
+export const fetchMockData = async () => mockDepartures as StopData[];

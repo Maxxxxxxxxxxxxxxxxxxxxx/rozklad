@@ -1,6 +1,6 @@
 import Dashboard from "@/page/Dashboard";
 import { useEffect, useState } from "react";
-import { fetchStopsData } from "@/services/departuresSerice";
+import { fetchMockData } from "@/services/departuresSerice";
 import { DeparturesContext } from "@/services/DeparturesContext";
 import type { StopData } from "./types";
 
@@ -8,7 +8,7 @@ function App() {
   const [stopsData, setStopsData] = useState([] as StopData[]);
 
   useEffect(() => {
-    fetchStopsData().then((data) => {
+    fetchMockData().then((data) => {
       setStopsData(data);
     });
   }, []);
