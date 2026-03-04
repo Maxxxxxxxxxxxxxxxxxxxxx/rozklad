@@ -1,17 +1,17 @@
 import React from "react";
 import Departure from "./Departure";
-import type { DepartureData } from "@/types";
-import departures from "@/mock/mockDepartures.json";
+import type { StopData } from "@/types";
 
-const DepartureBoard: React.FC = () => {
-  const departuresMockData: DepartureData[] =
-    departures.departures as DepartureData[];
+interface DepartureBoardProps {
+  stopData: StopData;
+}
 
+const DepartureBoard: React.FC<DepartureBoardProps> = (props) => {
   return (
-    <div className="border border-black p-2">
-      <h1> Departure Board</h1>
-      <div className="flex gap-3 column border-black p-1">
-        {departuresMockData.map((departure) => (
+    <div className="border border-black p-4 w-full">
+      <h1>{props.stopData.name}</h1>
+      <div className="flex flex-col gap-3 border-black p-1">
+        {props.stopData.departures.map((departure) => (
           <Departure key={departure.id} {...departure} />
         ))}
       </div>

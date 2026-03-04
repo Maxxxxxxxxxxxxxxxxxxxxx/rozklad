@@ -1,18 +1,23 @@
-import React from 'react';
-import Header from '../components/Header';
-import DepartureBoard from '../components/DepartureBoard';
+import React, { useContext } from "react";
+import Header from "../components/Header";
+import DepartureBoard from "../components/DepartureBoard";
+import DepartureBoardWrapper from "@/components/DepartureBoardWrapper";
+import { DeparturesContext } from "@/services/DeparturesContext";
+import type { StopData } from "@/types";
 
-interface DashboardProps {
-    title?: string;
-}
+const Dashboard: React.FC = () => {
+  const stopsData = useContext(DeparturesContext);
 
-const Dashboard: React.FC<DashboardProps> = () => {
-    return (
-        <div className="h-full w-full">
-            <Header />
-            <DepartureBoard />
-        </div>
-    );
+  return (
+    <div className="h-full w-full p-10">
+      <Header />
+      <DepartureBoardWrapper>
+        {stopsData.map((d: StopData) => (
+          <DepartureBoard key={d.lastUpdate} stopData={d} />
+        ))}
+      </DepartureBoardWrapper>
+    </div>
+  );
 };
 
 export default Dashboard;
