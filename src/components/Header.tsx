@@ -1,10 +1,16 @@
 import { STOP_NAME } from "@/constants";
 import React from "react";
+import { Clock } from "./Clock";
 
 const Header: React.FC = () => {
   return (
-    <div className="border border-white p-2 flex justify-center items-center font-extrabold text-2xl">
-      <h1>Odjazdy {STOP_NAME}</h1>
+    <div className="p-4 flex justify-between items-center font-extrabold text-4xl">
+      <div className="header-left text-amber-500">
+        <Clock />
+      </div>
+      <h1 className="header-center self-center text-5xl">
+        Odjazdy <span className="text-amber-500">{STOP_NAME}</span>
+      </h1>
     </div>
   );
 };

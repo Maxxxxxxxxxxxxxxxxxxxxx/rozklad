@@ -12,8 +12,8 @@ const Dashboard: React.FC = () => {
     <div className="h-full w-full">
       <Header />
       <DepartureBoardWrapper>
-        {stopsData.map((d: StopData) => (
-          <DepartureBoard key={d.lastUpdate} stopData={d} />
+        {stopsData?.map((d: StopData) => (
+          <DepartureBoard key={d.stopId} stopData={d} />
         ))}
       </DepartureBoardWrapper>
     </div>
