@@ -7,7 +7,7 @@ const LineNumberIcon: React.FC<{ lineNumber: number; color: string }> = ({
 }) => {
   return (
     <div
-      className={`p-2 w-10 h-10 text-xl font-bold rounded-full ${LINE_COLORS.find((l) => l.lineId === lineNumber)?.color || "bg-red-600"} text-white flex items-center justify-center`}
+      className={`p-2 w-10 h-10 text-xl font-bold rounded-full bg-red-600 text-white flex items-center justify-center`}
     >
       {lineNumber}
     </div>

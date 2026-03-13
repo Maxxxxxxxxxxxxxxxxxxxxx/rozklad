@@ -14,7 +14,7 @@ const Departure: React.FC<DepartureData> = (props) => {
 
   return (
     <div
-      className={` ${isDelayed && "border border-orange-500/50"} ${isDelayed ? "bg-orange-500/20 border border-orange-500/50 border-pulse" : "bg-gray-600/30"} rounded-lg p-2`}
+      className={` ${isDelayed && "border border-orange-500/50"} ${isDelayed ? "bg-orange-500/20 border border-orange-500/50 border-pulse" : "bg-gray-600/30"} h-15 rounded-lg p-2`}
     >
       <div className="dep-info-wrapper flex gap-3 flex-row grow items-center">
         <LineNumberIcon lineNumber={props.routeId} color="black" />
@@ -32,9 +32,9 @@ const Departure: React.FC<DepartureData> = (props) => {
               )}
             </div>
           </div>
-          <div className="flex flex-row gap-5 justify-between text-amber-500 items-center">
+          <div className="flex flex-row gap-5 justify-between dark:text-blue-300 bright:text-blue-500 items-center">
             <ClockIcon />
-            <div className="info-eta flex flex-row gap-2 text-amber-500 w-20 justify-end text-right">
+            <div className="info-eta flex flex-row gap-2 w-20 justify-end text-right">
               {estimatedTimeSeconds < 60 ? (
                 <Chevrons />
               ) : (
