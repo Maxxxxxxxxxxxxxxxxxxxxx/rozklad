@@ -37,3 +37,12 @@ export interface MockDepartures {
   lastUpdate: string;
   departures: DepartureData[];
 }
+
+export interface AppContext {
+  isAdminPanelOpen: boolean;
+  stopData: StopData[];
+  stopsInUse: StopInfo[];
+  toggleAdminPanel: () => void;
+  updateStopData: (newStopData: StopData[]) => void;
+  setStopsInUse: (stops: StopInfo[]) => void;
+}

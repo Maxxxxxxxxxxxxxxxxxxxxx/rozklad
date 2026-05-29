@@ -1,5 +1,5 @@
-import { API_BASE_URL, STOPS } from "../constants";
-import type { DeparturesResponse, StopData } from "../types";
+import { API_BASE_URL } from "../constants";
+import type { DeparturesResponse, StopData, StopInfo } from "../types";
 import mockDepartures from "@/mock/mockDepartures.json";
 
 export const fetchDepartures = async (stopId: number) => {
@@ -14,8 +14,14 @@ export const fetchDepartures = async (stopId: number) => {
   return (await res.json()) as DeparturesResponse;
 };
 
-export const fetchStopsData = async () => {
-  const promises = STOPS.map(async (stop) => {
+export const fetchStopsData = async (stops: StopInfo[]) => {
+  if (stops.length === 0) {
+    console.warn(
+      "No stops provided to fetchStopsData. Set stops in admin panel",
+    );
+    return [];
+  }
+  const promises = stops.map(async (stop) => {
     const departuresResponse = await fetchDepartures(stop.stopId);
     return {
       ...stop,

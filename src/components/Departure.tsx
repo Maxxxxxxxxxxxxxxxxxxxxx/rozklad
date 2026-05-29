@@ -17,7 +17,7 @@ const Departure: React.FC<DepartureData> = (props) => {
       className={` ${isDelayed && "border border-orange-500/50"} ${isDelayed ? "bg-orange-500/20 border border-orange-500/50 border-pulse" : "bg-gray-600/30"} h-15 rounded-lg p-2`}
     >
       <div className="dep-info-wrapper flex gap-3 flex-row grow items-center">
-        <LineNumberIcon lineNumber={props.routeId} color="black" />
+        <LineNumberIcon lineNumber={props.routeId} />
         <div className="flex flex-row justify-between items-center w-full">
           <div className="info-left flex flex-col gap-1">
             <p>{props.headsign}</p>

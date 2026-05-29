@@ -1,4 +1,6 @@
 import { createContext } from "react";
-import type { StopData } from "../types";
+import type { AppContext } from "@/types";
 
-export const DeparturesContext = createContext([] as StopData[]);
+const DeparturesContext = createContext({} as AppContext);
+
+export default DeparturesContext;
