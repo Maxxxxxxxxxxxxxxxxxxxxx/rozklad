@@ -14,10 +14,10 @@ export const fetchDepartures = async (stopId: number) => {
   return (await res.json()) as DeparturesResponse;
 };
 
-export const fetchStopsData = async (stops: StopInfo[]) => {
+export const fetchAllDeparturesByStopInfo = async (stops: StopInfo[]) => {
   if (stops.length === 0) {
     console.warn(
-      "No stops provided to fetchStopsData. Set stops in admin panel",
+      "No stops provided to fetchAllDeparturesByStopInfo. Set stops in admin panel",
     );
     return [];
   }
@@ -31,8 +31,8 @@ export const fetchStopsData = async (stops: StopInfo[]) => {
   });
 
   const res = await Promise.all(promises);
-
-  return res;
+  console.log("Fetched departures for stops:", res);
+  return res as StopData[];
 };
 
 export const fetchMockData = async () => mockDepartures as StopData[];

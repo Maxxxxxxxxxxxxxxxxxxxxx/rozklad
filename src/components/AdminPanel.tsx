@@ -1,23 +1,18 @@
 import DeparturesContext from "@/services/DeparturesContext";
-import type { StopInfo } from "@/types";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import AdminPanelStopForm from "./ui/AdminPanelStopForm";
 
 const AdminPanel: React.FC = () => {
   const ctx = useContext(DeparturesContext);
   const isOpen = ctx?.isAdminPanelOpen;
   const toggleAdminPanel = ctx?.toggleAdminPanel;
 
-  const stopsInUse = ctx?.stopsInUse || [];
-  const setStopsInUse = ctx?.setStopsInUse;
-
   return (
     <>
-      {/* Overlay with blur backdrop */}
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" />
       )}
 
-      {/* Admin Panel */}
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-2xl mx-4">
@@ -31,9 +26,7 @@ const AdminPanel: React.FC = () => {
               </button>
             </div>
             <div className="space-y-4"></div>
-            <form action="">
-                
-            </form>
+            <AdminPanelStopForm></AdminPanelStopForm>
             <div className="bottom mt-6 flex gap-4"></div>
           </div>
         </div>

@@ -1,32 +1,31 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { AppContext, StopInfo } from "@/types";
 import type { StopData } from "@/types";
-import { fetchStopsData } from "./departuresSerice";
+import { fetchAllDeparturesByStopInfo } from "./departuresSerice";
 import DeparturesContext from "./DeparturesContext";
 
 export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
   const [stopData, setStopData] = useState<StopData[]>([]);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [stopsInUse, setStopsInUse] = useState<StopInfo[]>([]);
-
   const useNoUpdate = import.meta.env.NO_UPDATE === "true"; // if env var is true, app fetches only once (for testing)
+  const stopsInUseRef = useRef(stopsInUse);
+
+  useEffect(() => {
+    stopsInUseRef.current = stopsInUse;
+  }, [stopsInUse]);
 
   useEffect(() => {
     if (useNoUpdate) {
-      fetchStopsData(stopsInUse).then((data) => {
+      fetchAllDeparturesByStopInfo(stopsInUseRef.current).then((data) => {
         setStopData(data);
       });
     } else {
-      fetchStopsData(stopsInUse).then((data) => {
-        setStopData(data);
-      });
-
       const interval = setInterval(() => {
-        fetchStopsData(stopsInUse).then((data) => {
+        fetchAllDeparturesByStopInfo(stopsInUseRef.current).then((data) => {
+          console.log("stops in use", stopsInUseRef.current);
           setStopData(data);
         });
-
-        console.log(stopData);
 
         return () => clearInterval(interval);
       }, 20000);
@@ -41,12 +40,19 @@ export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
     setStopData(newStopData);
   };
 
+  const setCurrentStopsInUse = async (stops: StopInfo[]) => {
+    setStopsInUse(stops);
+    const data = await fetchAllDeparturesByStopInfo(stops);
+    setStopData(data);
+  };
+
   const value = {
     stopData: stopData,
     isAdminPanelOpen: isAdminPanelOpen,
     toggleAdminPanel,
     updateStopData,
     stopsInUse,
+    setCurrentStopsInUse,
   } as AppContext;
 
   return (

@@ -7,7 +7,6 @@ import type { StopData } from "@/types";
 
 const Dashboard: React.FC = () => {
   const stopsData = useContext(DeparturesContext).stopData;
-
   return (
     <div className="h-full w-full">
       <Header />
