@@ -46,4 +46,5 @@ export interface AppContext {
   updateStopData: (newStopData: StopData[]) => void;
   setStopsInUse: (stops: StopInfo[]) => void;
   setCurrentStopsInUse: (stops: StopInfo[]) => Promise<void>;
+  lastSaveTime: string | null;
 }

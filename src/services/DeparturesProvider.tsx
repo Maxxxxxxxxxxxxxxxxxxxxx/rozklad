@@ -46,6 +46,8 @@ export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
     setStopData(data);
   };
 
+  const lastSaveTime = new Date().toISOString();
+
   const value = {
     stopData: stopData,
     isAdminPanelOpen: isAdminPanelOpen,
@@ -53,6 +55,7 @@ export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
     updateStopData,
     stopsInUse,
     setCurrentStopsInUse,
+    lastSaveTime,
   } as AppContext;
 
   return (

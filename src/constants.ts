@@ -1,5 +1,6 @@
 export const API_BASE_URL = "https://ckan2.multimediagdansk.pl";
 export const STOP_NAME = "Uniwersytet Gdański";
+export const APP_VERSION = "v0.1.0";
 
 export const STOPS = [
   {

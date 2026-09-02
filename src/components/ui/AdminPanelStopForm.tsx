@@ -2,6 +2,7 @@ import { STOPS } from "@/constants";
 import DeparturesContext from "@/services/DeparturesContext";
 import { useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { SectionHeader } from "./AdminPanelControls";
 
 type Props = {
   initialCount?: number;
@@ -57,50 +58,81 @@ export default function AdminPanelStopForm({
     });
   };
 
+  const counterButtonClass =
+    "w-8 h-8 flex items-center justify-center rounded-lg bg-gray-700 text-white font-bold transition-colors duration-200 ease-in-out hover:bg-gray-600 hover:cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-gray-700";
+
   return (
-    <form
-      onSubmit={handleSubmit(onFormSubmit)}
-      style={{ display: "flex", flexDirection: "column", gap: 8 }}
-    >
-      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-        <button
-          type="button"
-          onClick={handleRemove}
-          disabled={fields.length <= 1}
-        >
-          -
-        </button>
-        <span>Set stops</span>
-        <button
-          type="button"
-          onClick={handleAdd}
-          disabled={fields.length >= maxCount}
-        >
-          +
-        </button>
-      </div>
+    <div>
+      <SectionHeader
+        eyebrow="Przystanki"
+        title="Wybór przystanków"
+        description="Wybierz do czterech przystanków wyświetlanych na tablicy odjazdów."
+      />
+      <form
+        onSubmit={handleSubmit(onFormSubmit)}
+        className="flex flex-col gap-4"
+      >
+        <div className="flex items-center justify-between gap-4 border border-gray-700 bg-gray-900/50 rounded-lg p-3">
+          <span className="text-sm font-semibold text-white">
+            {fields.length} / {maxCount} miejsc
+          </span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={handleRemove}
+              disabled={fields.length <= 1}
+              className={counterButtonClass}
+            >
+              -
+            </button>
+            <button
+              type="button"
+              onClick={handleAdd}
+              disabled={fields.length >= maxCount}
+              className={counterButtonClass}
+            >
+              +
+            </button>
+          </div>
+        </div>
 
-      {fields.map((field, i) => (
-        <select
-          key={field.id}
-          {...control.register(`fields.${i}.value`)}
-          style={{ padding: 8 }}
-        >
-          <option value="">Select a stop</option>
-          {stopOptions.map((stop) => (
-            <option key={stop.stopId} value={stop.stopId}>
-              {stop.name}
-            </option>
+        <div className="flex flex-col gap-2">
+          {fields.map((field, i) => (
+            <div key={field.id} className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-blue-600/10 text-blue-400 border border-blue-400/30 text-xs font-bold">
+                {i + 1}
+              </span>
+              <select
+                {...control.register(`fields.${i}.value`)}
+                className="w-full p-2.5 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm transition-colors duration-200 ease-in-out hover:border-blue-400 focus:outline-none focus:border-blue-400"
+              >
+                <option value="">Wybierz przystanek</option>
+                {stopOptions.map((stop) => (
+                  <option key={stop.stopId} value={stop.stopId}>
+                    {stop.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           ))}
-        </select>
-      ))}
+        </div>
 
-      <div style={{ display: "flex", gap: 8 }}>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={handleReset}>
-          Reset
-        </button>
-      </div>
-    </form>
+        <div className="flex gap-3 mt-2 pt-4 border-t-2 border-gray-700">
+          <button
+            type="submit"
+            className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold transition-colors duration-200 ease-in-out hover:bg-blue-500 hover:cursor-pointer"
+          >
+            Zatwierdź
+          </button>
+          <button
+            type="button"
+            onClick={handleReset}
+            className="px-4 py-2 rounded-lg bg-gray-700 text-white text-sm font-semibold transition-colors duration-200 ease-in-out hover:bg-gray-600 hover:cursor-pointer"
+          >
+            Wyczyść
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
