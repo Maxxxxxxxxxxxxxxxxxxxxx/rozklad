@@ -1,8 +1,10 @@
-export const API_BASE_URL = "https://ckan2.multimediagdansk.pl";
+import type { StopMetadata } from "./types";
+
+export const API_BASE_URL = "http://localhost:3000";
 export const STOP_NAME = "Uniwersytet Gdański";
 export const APP_VERSION = "v0.1.0";
 
-export const STOPS = [
+export const STOPS: StopMetadata[] = [
   {
     stopId: 2035,
     stopCode: "01",

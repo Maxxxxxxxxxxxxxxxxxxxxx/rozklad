@@ -9,7 +9,7 @@ export const SectionHeader: React.FC<{
     <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-1">
       {eyebrow}
     </p>
-    <h2 className="text-2xl font-extrabold text-white">{title}</h2>
+    <h2 className="text-2xl font-bold text-white">{title}</h2>
     {description && <p className="text-sm text-white/50 mt-1">{description}</p>}
   </div>
 );

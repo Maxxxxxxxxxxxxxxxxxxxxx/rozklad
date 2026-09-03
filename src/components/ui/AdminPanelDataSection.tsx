@@ -11,15 +11,6 @@ const AdminPanelDataSection: React.FC = () => {
   const ctx = useContext(DeparturesContext);
   const [pollInterval, setPollInterval] = useState("30 s");
 
-  const lastUpdates = (ctx?.stopData ?? [])
-    .map((stop) => stop.lastUpdate)
-    .filter((value): value is string => Boolean(value));
-  const lastSync = lastUpdates.length
-    ? new Date(
-        Math.max(...lastUpdates.map((value) => new Date(value).getTime())),
-      ).toLocaleTimeString()
-    : "—";
-
   return (
     <div>
       <SectionHeader
@@ -34,10 +25,12 @@ const AdminPanelDataSection: React.FC = () => {
               <span className="animate-ping absolute inline-flex w-full h-full rounded-full bg-green-500 opacity-75" />
               <span className="relative inline-flex rounded-full w-2.5 h-2.5 bg-green-500" />
             </span>
-            <p className="text-sm font-semibold text-white">Połączenie na żywo</p>
+            <p className="text-sm font-semibold text-white">
+              Połączenie na żywo
+            </p>
           </div>
           <span className="font-mono text-xs text-white/50">
-            ostatnia synchronizacja {lastSync}
+            ostatnia synchronizacja {}
           </span>
         </div>
         <OptionRow
@@ -59,7 +52,9 @@ const AdminPanelDataSection: React.FC = () => {
           </span>
         </OptionRow>
         <div className="border border-gray-700 bg-gray-900/50 rounded-lg p-4">
-          <p className="text-sm font-semibold text-white mb-2">Punkt końcowy API</p>
+          <p className="text-sm font-semibold text-white mb-2">
+            Punkt końcowy API
+          </p>
           <p className="font-mono text-xs text-white/50 break-all bg-gray-900 border border-gray-700 rounded px-2 py-1.5">
             {API_BASE_URL}
           </p>

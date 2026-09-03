@@ -14,8 +14,8 @@ const AdminPanel: React.FC = () => {
   const toggleAdminPanel = ctx?.toggleAdminPanel;
   const [tab, setTab] = useState<AdminPanelTab>("stops");
 
-  const lastSaveTime = ctx?.lastSaveTime
-    ? new Date(ctx.lastSaveTime).toLocaleString()
+  const lastSaveTime = ctx?.parametersLastSaveTime
+    ? new Date(ctx.parametersLastSaveTime).toLocaleString()
     : "Never";
 
   if (!isOpen) return null;
@@ -29,7 +29,7 @@ const AdminPanel: React.FC = () => {
             <div className="flex items-center gap-3">
               <div className="bg-blue-500 w-3 h-6 pt-7 rounded-sm"></div>
               <div>
-                <h1 className="text-2xl font-extrabold text-white">
+                <h1 className="text-2xl font-bold text-white">
                   Panel administracyjny
                 </h1>
                 <p className="text-xs text-white/50 mt-0.5">

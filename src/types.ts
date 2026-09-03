@@ -21,13 +21,13 @@ export interface DeparturesResponse {
   departures: DepartureData[];
 }
 
-export interface StopInfo {
+export interface StopMetadata {
   stopId: number;
   stopCode: string;
   name: string;
 }
 
-export interface StopData extends StopInfo {
+export interface StopData extends StopMetadata {
   departures: DepartureData[];
   lastUpdate: string | null;
   error?: string;
@@ -41,10 +41,10 @@ export interface MockDepartures {
 export interface AppContext {
   isAdminPanelOpen: boolean;
   stopData: StopData[];
-  stopsInUse: StopInfo[];
+  stopsInUse: StopMetadata[];
   toggleAdminPanel: () => void;
   updateStopData: (newStopData: StopData[]) => void;
-  setStopsInUse: (stops: StopInfo[]) => void;
-  setCurrentStopsInUse: (stops: StopInfo[]) => Promise<void>;
-  lastSaveTime: string | null;
+  setStopsInUse: (stops: StopMetadata[]) => void;
+  setCurrentStopsInUse: (stops: StopMetadata[]) => Promise<void>;
+  parametersLastSaveTime: string | null;
 }
