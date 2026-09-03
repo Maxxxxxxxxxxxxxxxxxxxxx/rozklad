@@ -31,7 +31,7 @@ const AdminPanelNav: React.FC<{
   onChange: (tab: AdminPanelTab) => void;
 }> = ({ active, onChange }) => {
   return (
-    <nav className="flex md:flex-col gap-1 md:w-44 shrink-0 md:border-r-2 border-gray-700 md:pr-3 overflow-x-auto md:overflow-visible">
+    <nav className="flex md:flex-col gap-1 md:w-54 shrink-0 md:border-r-2 border-gray-700 md:pr-3 overflow-x-auto md:overflow-visible p-4">
       {NAV_ITEMS.map(({ id, label, icon: Icon }) => {
         const isActive = active === id;
         return (
@@ -39,7 +39,7 @@ const AdminPanelNav: React.FC<{
             key={id}
             type="button"
             onClick={() => onChange(id)}
-            className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-200 ease-in-out hover:cursor-pointer border-l-2 ${
+            className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors duration-200 ease-in-out hover:cursor-pointer border-l-9 ${
               isActive
                 ? "bg-blue-600/10 text-blue-400 border-blue-400"
                 : "text-white/50 border-transparent hover:text-white hover:bg-gray-700/50"

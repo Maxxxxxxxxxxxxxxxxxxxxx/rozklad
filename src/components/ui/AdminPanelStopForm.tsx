@@ -23,7 +23,7 @@ export default function AdminPanelStopForm({
   const initialCountClamped = clamp(initialCount);
   const stopOptions = STOPS;
   const ctx = useContext(DeparturesContext);
-  const { control, handleSubmit, reset } = useForm<FormData>({
+  const { control, handleSubmit, reset, watch } = useForm<FormData>({
     defaultValues: {
       fields: Array(initialCountClamped).fill({ value: "" }),
     },
@@ -57,6 +57,20 @@ export default function AdminPanelStopForm({
       fields: Array(initialCountClamped).fill({ value: "" }),
     });
   };
+
+  const selectedStopIds = (watch("fields") ?? []).map(
+    (field) => field?.value ?? "",
+  );
+
+  // A stop picked in one slot is hidden from the other slots' dropdowns,
+  // so the same stop cannot be selected twice.
+  const availableStops = (index: number) =>
+    stopOptions.filter(
+      (stop) =>
+        !selectedStopIds.some(
+          (value, i) => i !== index && value === stop.stopId.toString(),
+        ),
+    );
 
   const counterButtonClass =
     "w-8 h-8 flex items-center justify-center rounded-lg bg-gray-700 text-white font-bold transition-colors duration-200 ease-in-out hover:bg-gray-600 hover:cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-gray-700";
@@ -107,7 +121,7 @@ export default function AdminPanelStopForm({
                 className="w-full p-2.5 rounded-lg bg-gray-900 border border-gray-700 text-white text-sm transition-colors duration-200 ease-in-out hover:border-blue-400 focus:outline-none focus:border-blue-400"
               >
                 <option value="">Wybierz przystanek</option>
-                {stopOptions.map((stop) => (
+                {availableStops(i).map((stop) => (
                   <option key={stop.stopId} value={stop.stopId}>
                     {stop.name}
                   </option>

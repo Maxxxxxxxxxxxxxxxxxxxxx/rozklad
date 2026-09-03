@@ -10,6 +10,11 @@ import {
 const AdminPanelDataSection: React.FC = () => {
   const ctx = useContext(DeparturesContext);
   const [pollInterval, setPollInterval] = useState("30 s");
+  const handlePollIntervalChange = (value: string) => {
+    setPollInterval(value);
+    const intervalInSeconds = parseInt(value.split(" ")[0], 10);
+    ctx.setPollInterval(intervalInSeconds);
+  };
 
   return (
     <div>

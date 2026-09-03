@@ -7,6 +7,7 @@ import {
 
 const AdminPanelDisplaySection: React.FC = () => {
   const [theme, setTheme] = useState("Ciemny");
+  const [language, setLanguage] = useState("Polski");
 
   return (
     <div>
@@ -21,6 +22,13 @@ const AdminPanelDisplaySection: React.FC = () => {
             options={["Ciemny", "Jasny", "Auto"]}
             value={theme}
             onChange={setTheme}
+          />
+        </OptionRow>
+        <OptionRow label="Język" description="Język aplikacji">
+          <SegmentedControl
+            options={["Polski", "Angielski"]}
+            value={language}
+            onChange={setLanguage}
           />
         </OptionRow>
       </div>

@@ -1,15 +1,15 @@
 import Dashboard from "@/page/Dashboard";
-import DeparturesProvider from "@/services/DeparturesProvider";
+import AppContextProvider from "@/services/AppContextProvider";
 import AdminPanel from "./components/AdminPanel";
 
 function App() {
   return (
-    <DeparturesProvider>
+    <AppContextProvider>
       <AdminPanel />
       <div className="margin-2 bg-gray-900 text-white">
         <Dashboard />
       </div>
-    </DeparturesProvider>
+    </AppContextProvider>
   );
 }
 

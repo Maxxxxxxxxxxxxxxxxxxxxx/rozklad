@@ -47,4 +47,5 @@ export interface AppContext {
   setStopsInUse: (stops: StopMetadata[]) => void;
   setCurrentStopsInUse: (stops: StopMetadata[]) => Promise<void>;
   parametersLastSaveTime: string | null;
+  setPollInterval: (interval: number) => void;
 }

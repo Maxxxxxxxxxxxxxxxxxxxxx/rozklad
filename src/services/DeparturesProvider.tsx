@@ -4,12 +4,14 @@ import type { StopData } from "@/types";
 import { fetchAllDeparturesByStopInfo } from "./departuresSerice";
 import DeparturesContext from "./DeparturesContext";
 
-export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
+export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [stopData, setStopData] = useState<StopData[]>([]);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [stopsInUse, setStopsInUse] = useState<StopMetadata[]>([]);
+  const [pollInterval, setPollInterval] = useState(20000); // default to 20 seconds
   const useNoUpdate = import.meta.env.NO_UPDATE === "true"; // if env var is true, app fetches only once (for testing)
   const stopsInUseRef = useRef(stopsInUse);
+  const syncStatus = useRef<"disconnected" | "syncing" | "synced">("syncing");
 
   useEffect(() => {
     stopsInUseRef.current = stopsInUse;
@@ -30,9 +32,9 @@ export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
         console.log("stopdata", stopData);
 
         return () => clearInterval(interval);
-      }, 20000);
+      }, pollInterval);
     }
-  }, []);
+  }, [pollInterval]);
 
   const toggleAdminPanel = () => {
     setIsAdminPanelOpen((prev) => !prev);
@@ -59,6 +61,7 @@ export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
     stopsInUse,
     setCurrentStopsInUse,
     parametersLastSaveTime: parametersLastSaveTime,
+    setPollInterval,
   } as AppContext;
 
   return (
@@ -68,4 +71,4 @@ export const DeparturesProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default DeparturesProvider;
+export default AppContextProvider;

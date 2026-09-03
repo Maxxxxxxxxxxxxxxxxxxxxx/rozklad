@@ -1,5 +1,6 @@
 import React from "react";
 import Departure from "./Departure";
+import EmptyDepartures from "@/components/ui/EmptyDepartures";
 import type { StopData } from "@/types";
 
 interface DepartureBoardProps {
@@ -20,9 +21,13 @@ const DepartureBoard: React.FC<DepartureBoardProps> = (props) => {
         </h5>
       </div>
       <div className="flex flex-col gap-2 border-black p-2">
-        {props.stopData.departures.map((departure) => (
-          <Departure key={departure.trip} {...departure} />
-        ))}
+        {props.stopData.departures?.length ? (
+          props.stopData.departures.map((departure) => (
+            <Departure key={departure.trip} {...departure} />
+          ))
+        ) : (
+          <EmptyDepartures />
+        )}
       </div>
     </div>
   );
