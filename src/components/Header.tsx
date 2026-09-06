@@ -2,10 +2,10 @@ import { STOP_NAME } from "@/constants";
 import React, { useContext } from "react";
 import { Clock } from "./Clock";
 import Gear from "./ui/Gear";
-import DeparturesContext from "@/services/DeparturesContext";
+import AppContext from "@/services/AppContext";
 
 const Header: React.FC = () => {
-  const toggleAdminPanel = useContext(DeparturesContext)?.toggleAdminPanel;
+  const toggleAdminPanel = useContext(AppContext)?.toggleAdminPanel;
   return (
     <div className="p-4 flex justify-between items-center font-extrabold text-4xl">
       <div className="header-left flex flex-row align-center items-center gap-2 text-blue-400">

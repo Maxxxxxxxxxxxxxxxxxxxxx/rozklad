@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import Header from "../components/Header";
 import DepartureBoard from "../components/DepartureBoard";
 import DepartureBoardWrapper from "@/components/DepartureBoardWrapper";
-import DeparturesContext from "@/services/DeparturesContext";
+import AppContext from "@/services/AppContext";
 import type { StopData } from "@/types";
 
 const Dashboard: React.FC = () => {
-  const stopsData = useContext(DeparturesContext).stopData;
+  const stopsData = useContext(AppContext).stopData;
   return (
     <div className="h-full w-full">
       <Header />

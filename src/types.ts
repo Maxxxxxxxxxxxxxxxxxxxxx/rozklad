@@ -38,7 +38,7 @@ export interface MockDepartures {
   departures: DepartureData[];
 }
 
-export interface AppContext {
+export interface AppContextProps {
   isAdminPanelOpen: boolean;
   stopData: StopData[];
   stopsInUse: StopMetadata[];
@@ -47,5 +47,8 @@ export interface AppContext {
   setStopsInUse: (stops: StopMetadata[]) => void;
   setCurrentStopsInUse: (stops: StopMetadata[]) => Promise<void>;
   parametersLastSaveTime: string | null;
+  pollInterval: number;
   setPollInterval: (interval: number) => void;
+  clearSavedSettings: () => void;
+  syncStatus: boolean;
 }

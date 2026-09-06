@@ -22,9 +22,16 @@ const DepartureBoard: React.FC<DepartureBoardProps> = (props) => {
       </div>
       <div className="flex flex-col gap-2 border-black p-2">
         {props.stopData.departures?.length ? (
-          props.stopData.departures.map((departure) => (
-            <Departure key={departure.trip} {...departure} />
-          ))
+          props.stopData.departures
+            .sort((a, b) => {
+              // sort ASC by estimatedTime
+              const timeA = new Date(a.estimatedTime).getTime();
+              const timeB = new Date(b.estimatedTime).getTime();
+              return timeA - timeB;
+            })
+            .map((departure) => (
+              <Departure key={departure.trip} {...departure} />
+            ))
         ) : (
           <EmptyDepartures />
         )}

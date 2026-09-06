@@ -1,4 +1,4 @@
-import DeparturesContext from "@/services/DeparturesContext";
+import AppContext from "@/services/AppContext";
 import React, { useContext, useState } from "react";
 import AdminPanelNav from "./ui/AdminPanelNav";
 import type { AdminPanelTab } from "./ui/AdminPanelNav";
@@ -9,7 +9,7 @@ import AdminPanelDataSection from "./ui/AdminPanelDataSection";
 import AdminPanelAboutSection from "./ui/AdminPanelAboutSection";
 
 const AdminPanel: React.FC = () => {
-  const ctx = useContext(DeparturesContext);
+  const ctx = useContext(AppContext);
   const isOpen = ctx?.isAdminPanelOpen;
   const toggleAdminPanel = ctx?.toggleAdminPanel;
   const [tab, setTab] = useState<AdminPanelTab>("stops");

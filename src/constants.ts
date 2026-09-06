@@ -15,6 +15,16 @@ export const STOPS: StopMetadata[] = [
     stopCode: "02",
     name: "Uniwersytet Gdański 02 (kier. Centrum)",
   },
+  {
+    stopId: 14550,
+    stopCode: "02",
+    name: "Biblioteka Główna UG 02 (kier. Centrum)",
+  },
+  {
+    stopId: 14551,
+    stopCode: "01",
+    name: "Biblioteka Główna UG 01 (kier. Jelitkowo)",
+  },
 ];
 
 export const LINE_COLORS = [

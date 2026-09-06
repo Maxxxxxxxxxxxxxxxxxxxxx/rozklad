@@ -1,5 +1,5 @@
 import { STOPS } from "@/constants";
-import DeparturesContext from "@/services/DeparturesContext";
+import AppContext from "@/services/AppContext";
 import { useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { SectionHeader } from "./AdminPanelControls";
@@ -22,10 +22,28 @@ export default function AdminPanelStopForm({
   const clamp = (n: number) => Math.max(1, Math.min(maxCount, n));
   const initialCountClamped = clamp(initialCount);
   const stopOptions = STOPS;
-  const ctx = useContext(DeparturesContext);
+  const ctx = useContext(AppContext);
+
+  // Pre-fill the slots with the stops already in use, so opening the panel
+  // shows the current selection instead of empty dropdowns.
+  const buildInitialFields = () => {
+    const selected = (ctx?.stopsInUse ?? [])
+      .filter((stop) =>
+        stopOptions.some((option) => option.stopId === stop.stopId),
+      )
+      .slice(0, maxCount)
+      .map((stop) => ({ value: stop.stopId.toString() }));
+
+    while (selected.length < initialCountClamped) {
+      selected.push({ value: "" });
+    }
+
+    return selected;
+  };
+
   const { control, handleSubmit, reset, watch } = useForm<FormData>({
     defaultValues: {
-      fields: Array(initialCountClamped).fill({ value: "" }),
+      fields: buildInitialFields(),
     },
   });
   const { fields, append, remove } = useFieldArray({
