@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# Tablica odjazdów ZTM — aplikacja frontendowa
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikacja SPA (React + TypeScript) wyświetlająca tablicę odjazdów dla wybranych przystanków.
+Dane pobiera z serwera pośredniczącego (`rozklad-proxy-server`), nie bezpośrednio z API ZTM.
 
-Currently, two official plugins are available:
+## Wymagania
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **npm** (wraz z Node.js — wersja 20.19+ lub 22.12+, wymagana przez Vite 7)
+- **Vite** — narzędzie budujące; instaluje się automatycznie razem z zależnościami przez `npm install`, nie trzeba go instalować globalnie
+- Uruchomiony serwer proxy pod adresem `http://localhost:3000`
 
-## React Compiler
+## Uruchomienie (tryb deweloperski)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Aplikacja startuje pod `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Zawartość `dist/` to statyczne pliki — wystarczy je podać dowolnym serwerem HTTP.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Konfiguracja
+
+Oba ustawienia znajdują się w `src/constants.ts`:
+
+| Stała          | Znaczenie                                              |
+| -------------- | ------------------------------------------------------ |
+| `API_BASE_URL` | adres serwera proxy                                    |
+| `STOPS`        | lista przystanków dostępnych w panelu administracyjnym |
+
+## Skrypty
+
+| Polecenie         | Działanie                          |
+| ----------------- | ---------------------------------- |
+| `npm run dev`     | serwer deweloperski z hot reloadem |
+| `npm run build`   | build produkcyjny                  |
+| `npm run preview` | podgląd builda                     |
+| `npm run lint`    | ESLint                             |
